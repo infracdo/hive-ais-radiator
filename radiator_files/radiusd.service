@@ -1,0 +1,11 @@
+[Unit]
+Description=Radiator RADIUS Server
+After=network.target
+
+[Service]
+ExecStart=/opt/radiator/radiator/radiusd -config_file /etc/radiator/radiator.conf -foreground -log_stdout
+WorkingDirectory=/opt/radiator/radiator
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

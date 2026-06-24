@@ -1,0 +1,28 @@
+services:
+
+  radiator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: radiator
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    volumes:
+      - ./radiator.conf:/etc/radiator/radiator.conf:ro
+      - ./dictionary:/opt/radiator/radiator/dictionary:ro
+      - ./certs:/etc/radiator/certs:ro
+      - ./logs/radiator.log:/var/log/radiator/radiator.log
+      - ./session_hook.pl:/etc/radiator/session_hook.pl:ro
+    environment:
+      DB_HOST: 10.42.4.19
+      DB_PORT: 5432
+      DB_USER: zeepuser
+      DB_PASSWORD: zeeppassword123
+      DB_NAME: device_provisioning
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped

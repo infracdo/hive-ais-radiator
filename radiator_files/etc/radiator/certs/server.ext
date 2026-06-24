@@ -1,0 +1,5 @@
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = radiator.server
+DNS.2 = radiator.example
